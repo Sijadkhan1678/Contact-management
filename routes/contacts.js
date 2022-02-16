@@ -65,20 +65,80 @@ async (req,res)=>{
 
 }
 )
+
 //%%% put api/contacts
 //%%% desc update contact
 //%%% access private
 
+router.put('/:id',auth, async (req,res)=>{
 
-router.put('/:id', (req, res) => {
-    res.send('update contact')
+    const {name,email,phone,type}= req.body;
+
+    // initialize empty object to store contact fields
+
+    const contactfilds= {};
+
+    if(name) contactfilds.name= name;
+
+    if(email) contactfilds.email=email;
+
+    if(phone) contactfilds.phone=phone;
+
+    if(type) contactfilds.type= type;
+
+    try{
+        let contact= await Contact.findById(req.params.id)
+        if(!contact){
+            res.status(404).json({msg: 'this contact does not exist'})
+        }
+        if(contact.user.toString() !== req.user.id){
+            res.status(401).json({msg: 'you don`t have the correct authorization to update this contact'})
+        }
+        const contact = await Contact.findByIdAndUpdate(req.params.id,{  $set: contactfilds },
+            {
+            new: true
+              })
+
+              // return the updated contact
+
+              res.json(contact)
+
+    }
+    catch(err){
+        console.error(err.message)
+        res.status(500).send('server error')
+    }
+
+
+
 })
+
+
+
 //%%% delete api/contacts
 //%%% desc delete contact
 //%%% access private
 
-
 router.delete('/:id', (req, res) => {
-    res.send('delete contact')
+    try{
+        let contact= await Contact.findById(req.params.id)
+        if(!contact){
+            res.status(404).json({msg: 'this contact does not exist'})
+        }
+        if(contact.user.toString() !== req.user.id){
+            res.status(401).json({msg: 'you don`t have the correct authorization to delete this contact'})
+        }
+
+        await Contact.findByIdAndRemove(req.params.id)
+         
+            res.json({msg: 'contact successfully deleted'})
+            
+
+    }
+    catch(err){
+        console.error(err.message)
+        res.status(500).send('server error')
+    }
+
 })
 module.exports = router
