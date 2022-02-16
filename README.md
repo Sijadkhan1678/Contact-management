@@ -1,2 +1,2 @@
 # Contact-management
- contact management is 
+ contact management is   app to manage contacts
