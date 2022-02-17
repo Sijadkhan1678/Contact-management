@@ -18,19 +18,33 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
                 id : 2,
                 name: 'Arshad Khan',
                 email: 'arshad@gmail.com',
-                phone: '111-333-444-999'
+                phone: '111-333-444-999',
+                type: 'professional'
+
             },
             {   id: 3,
                 name: 'Wasim Khan',
                 email: 'wasim@gmail.com',
-                phone: '201-301-402-989'
+                phone: '201-301-402-989',
+                type:  'personal'
             }
         ]
     }
     const [state,dispatch]= userReducer(contactReducer,initialState)
 
     // add contact 
+
     // remove contact
+
+    // uptate contact
+
+    // delete contact
+
+    // filter contact
+
+    //clear filter
+
+
 
 
 
