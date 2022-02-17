@@ -1,4 +1,5 @@
 import React, {userReducer} from 'react'
+import {v4 as uuid}  from 'uuid'
 import contactContext from './contactContext'
 import contactReducer from './contactReducer'
 import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CLEAR_CURRENT,SET_ALERT,REMOVE_ALERT,FILETER_CONTACTS,CLEAR_FILTER } from '../Types'
@@ -32,7 +33,16 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
     }
     const [state,dispatch]= userReducer(contactReducer,initialState)
 
+
     // add contact 
+  const  addContact= contact=>{
+      contact.id=uuid();
+      dispatch({
+          
+          type: ADD_CONTACT,
+          payload: contact
+       } )
+  }
 
     // remove contact
 
@@ -50,11 +60,12 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
 
 
 
-  return <contactContext.provider value={{
-      contacts: state.contacts
+  return (<contactContext.provider value={{
+      contacts: state.contacts,
+      addContact
   }}>
       {props.childern}
-  </contactContext.provider>
+  </contactContext.provider> )
 }
 
 export default contactState;

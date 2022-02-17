@@ -1,11 +1,16 @@
-import React from 'react'
-
+import React from 'react';
+import Contacts from '../contacts/Contacts';
+import ContactForm from '../contacts/ContactForm';
 const Home = () => {
   return (
     <div>
-        <h1>
-            Home component
-        </h1>
+        <div>
+        <ContactForm/>  
+        </div>
+
+        <div>
+        <Contacts/>
+        </div>
     </div>
   )
 }

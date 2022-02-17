@@ -1,4 +1,5 @@
 import React from 'react'
+import propTypes from 'prop-Types'
 
 const  ContactItems =({contact}) => {
     const {name,email,phone,type}=contact;
@@ -12,7 +13,8 @@ const  ContactItems =({contact}) => {
        <ul>
            {email && (
                <li>{email}</li>
-           )}
+           )
+           }
 
            {phone &&(
                <li>{phone}</li>
@@ -21,5 +23,8 @@ const  ContactItems =({contact}) => {
            
     </div>
   )
+}
+ContactItems.propTypes={
+    contact: PropTypes.object.isRequired
 }
 export default ContactItems;
