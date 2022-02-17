@@ -1,8 +1,20 @@
-import React from 'react'
+import React,{useContext} from 'react';
+import ContactContext from '../../context/contacts/contactContext'
 import propTypes from 'prop-Types'
 
 const  ContactItems =({contact}) => {
-    const {name,email,phone,type}=contact;
+
+    const {id,name,email,phone,type}=contact;
+
+    const contactContext= useContext(ContactContext)
+
+    const {deleteContact,setCurrent,clearCurrent} = contactContext
+
+    const onDelete=() => {
+       deleteContact(id)
+       clearCurrent();
+    }    
+
 
   return (
     <div>
@@ -12,14 +24,19 @@ const  ContactItems =({contact}) => {
        </h3>
        <ul>
            {email && (
-               <li>{email}</li>
+               <li><i className='fas fa-envelope-open'/> {email}</li>
            )
            }
 
            {phone &&(
-               <li>{phone}</li>
+               <li><i className=''/>{phone}</li>
            )}
        </ul>
+       <p>
+       <button onClick={()=>setCurrent(contact)}>Edit</button>
+       <button onClick={onDelete}>Delete</button>
+
+       </p>
            
     </div>
   )
