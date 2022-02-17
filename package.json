@@ -14,7 +14,9 @@
     "start": "node index.js"
     
   },
-  "author": "",
+  "author": {
+    "name": "sijad khan"
+  },
   "license": "ISC",
   "description": ""
 }
