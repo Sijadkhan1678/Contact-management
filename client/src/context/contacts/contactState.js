@@ -29,7 +29,9 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
                 phone: '201-301-402-989',
                 type:  'personal'
             }
-        ]
+            
+        ],
+        current: null
     }
     const [state,dispatch]= userReducer(contactReducer,initialState)
 
@@ -44,11 +46,35 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
        } )
   }
 
+  // delete contact
+  const deleteContact = id =>{
+       dispatch({
+           type: deleteContact,
+           payload : id
+       })
+  }
+
+  
+    //  set current
+  const setCurrent= contact=>{
+           dispatch({
+               type : UPDATE_CONTACT,
+               payload: contact
+           })
+  }
+  
+  // clear current
+  
+  const clearCurrent= ()=>{
+
+      dispatch({type: clearCurrent})
+  }
+
     // remove contact
 
-    // uptate contact
-
-    // delete contact
+    
+// uptate contact
+    
 
     // filter contact
 
@@ -62,7 +88,10 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
 
   return (<contactContext.provider value={{
       contacts: state.contacts,
-      addContact
+      current: state.current,
+      addContact,
+      deleteContact,
+      clearCurrent
   }}>
       {props.childern}
   </contactContext.provider> )
