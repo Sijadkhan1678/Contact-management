@@ -6,6 +6,7 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
 
 
 
+
  const contactState = props => {
      
     const initialState={
@@ -46,6 +47,15 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
        } )
   }
 
+  // uptate contact 
+    const updateContact = contact =>{
+        dispatch({
+            type: UPDATE_CONTACT,
+            payload: contact
+        })
+        
+    }
+
   // delete contact
   const deleteContact = id =>{
        dispatch({
@@ -58,7 +68,7 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
     //  set current
   const setCurrent= contact=>{
            dispatch({
-               type : UPDATE_CONTACT,
+               type : SET_CURRENT,
                payload: contact
            })
   }
@@ -67,13 +77,13 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
   
   const clearCurrent= ()=>{
 
-      dispatch({type: clearCurrent})
+      dispatch({type: CLEAR_CURRENT})
   }
 
     // remove contact
 
     
-// uptate contact
+
     
 
     // filter contact
@@ -90,7 +100,9 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
       contacts: state.contacts,
       current: state.current,
       addContact,
+      updateContact,
       deleteContact,
+      setCurrent,
       clearCurrent
   }}>
       {props.childern}
