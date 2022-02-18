@@ -5,15 +5,17 @@ import contactContext from '../../context/contacts/contactContext';
 
 const Contacts=() => {
  const  ContactContext= useContext(contactContext);
- const {contacts}= ContactContext;
+ const {contacts,filtered}= ContactContext;
 
   return (
 <Fragment>
+  {
+ filtered !== null ? filtered.map( contact => (<ContactItems key={contact.id} contact={contact}/>))
+ : contacts.map(contact=> (<ContactItems key={contact.id} contact={contact} />))
 
-{contacts.map(contact=> (<ContactItems key={contact.id} contact={contact} />))}
-
-</Fragment>
+}
+  </Fragment>
   )
-  }
+}
 
 export default Contacts;

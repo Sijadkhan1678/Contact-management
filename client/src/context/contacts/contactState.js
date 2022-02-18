@@ -3,6 +3,8 @@ import {v4 as uuid}  from 'uuid'
 import contactContext from './contactContext'
 import contactReducer from './contactReducer'
 import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CLEAR_CURRENT,SET_ALERT,REMOVE_ALERT,FILETER_CONTACTS,CLEAR_FILTER } from '../Types'
+import { type } from 'os'
+import { stat } from 'fs'
 
 
 
@@ -32,7 +34,8 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
             }
             
         ],
-        current: null
+        current: null,
+        filtered: null
     }
     const [state,dispatch]= userReducer(contactReducer,initialState)
 
@@ -80,17 +83,20 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
       dispatch({type: CLEAR_CURRENT})
   }
 
-    // remove contact
-
-    
-
-    
 
     // filter contact
+    const filterContacts = text =>{
+        dispatch({
+            type: FILETER_CONTACTS,
+            payload :  text
+          }  )
+    }
 
     //clear filter
-
-    // 
+  
+    const clearFilter= ()=>{
+        dispatch({type: CLEAR_FILTER })
+    }
 
 
 
@@ -99,9 +105,12 @@ import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CL
   return (<contactContext.provider value={{
       contacts: state.contacts,
       current: state.current,
+      filtered: state.filtered,
       addContact,
       updateContact,
       deleteContact,
+      filterContacts,
+      clearFilter,
       setCurrent,
       clearCurrent
   }}>
