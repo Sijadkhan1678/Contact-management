@@ -1,10 +1,8 @@
-import React, {userReducer} from 'react'
+import React, {useReducer} from 'react'
 import {v4 as uuid}  from 'uuid'
 import contactContext from './contactContext'
 import contactReducer from './contactReducer'
-import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CLEAR_CURRENT,SET_ALERT,REMOVE_ALERT,FILETER_CONTACTS,CLEAR_FILTER } from '../Types'
-import { type } from 'os'
-import { stat } from 'fs'
+import { ADD_CONTACT,REMOVE_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,SET_CURRENT,CLEAR_CURRENT,SET_ALERT,REMOVE_ALERT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
 
 
 
@@ -37,7 +35,7 @@ import { stat } from 'fs'
         current: null,
         filtered: null
     }
-    const [state,dispatch]= userReducer(contactReducer,initialState)
+    const [state,dispatch]= useReducer(contactReducer,initialState)
 
 
     // add contact 
@@ -62,7 +60,7 @@ import { stat } from 'fs'
   // delete contact
   const deleteContact = id =>{
        dispatch({
-           type: deleteContact,
+           type: DELETE_CONTACT,
            payload : id
        })
   }
@@ -87,7 +85,7 @@ import { stat } from 'fs'
     // filter contact
     const filterContacts = text =>{
         dispatch({
-            type: FILETER_CONTACTS,
+            type: FILTER_CONTACTS,
             payload :  text
           }  )
     }

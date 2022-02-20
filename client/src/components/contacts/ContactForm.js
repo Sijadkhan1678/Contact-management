@@ -1,4 +1,4 @@
-import { clear } from 'console';
+
 import React,{useState,useContext,useEffect} from 'react';
 import ContactContext from '../../context/contacts/contactContext';
 
@@ -30,7 +30,7 @@ const  allClear = () =>{
      email: '',
      phone: '',
      type: 'personal'
- })
+ }) 
 
  const {name,email,phone,type}=contact
 

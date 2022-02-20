@@ -1,5 +1,5 @@
-import React,{userContext} from 'react';
+import React,{useContext} from 'react';
 
-const contactContext= userContext();
+const contactContext= useContext();
 
 export default contactContext;
