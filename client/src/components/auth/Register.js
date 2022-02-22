@@ -8,7 +8,7 @@ import AlertContext from '../../context/alert/alertContext'
      const alertContext= useContext(AlertContext);
 
      const {setAlert}= alertContext
-     const {register,clearErors,error}= AuthContext;
+     const {register,clearErrors,error,isAuthenticated}= AuthContext;
      
      const [user,setUser]=useState({
         name: '',
@@ -18,11 +18,14 @@ import AlertContext from '../../context/alert/alertContext'
     });
 
      useEffect(()=>{
-         if(error ==='a user with this email already exist'){
-             setAlert(error,'danger')
-             clearErors();
+         if(isAuthenticated){
+             props.history.push('/')
          }
-     },[error])
+         if(error ==='A User with this email already exist'){
+             setAlert(error,'danger')
+             clearErrors();
+         }
+     },[error,isAuthenticated,props.history])
 
      
      const {name,email,password,password2}=user

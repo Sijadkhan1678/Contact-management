@@ -1,6 +1,6 @@
 import React,{useContext} from 'react';
 import ContactContext from '../../context/contacts/contactContext'
-import propTypes from 'prop-Types'
+import propTypes from 'prop-types'
 
 const  ContactItems =({contact}) => {
 
@@ -42,6 +42,6 @@ const  ContactItems =({contact}) => {
   )
 }
 ContactItems.propTypes={
-    contact: PropTypes.object.isRequired
+    contact: propTypes.object.isRequired
 }
 export default ContactItems;

@@ -1,10 +1,10 @@
 import React,{useReducer} from 'react';
 import authReducer from './alertReducer';
 import { v4 as uuid} from 'uuid'
-import alertContext from './alertContext'
+import AlertContext from './alertContext'
 import {SET_ALERT,REMOVE_ALERT} from '../Types'
 
-const alertState = props =>{
+const AlertState = props =>{
 
     const initialState=[];
     const {state,dispatch}= useReducer(authReducer,initialState);
@@ -17,11 +17,11 @@ const alertState = props =>{
     }
 
 
- return(<alertContext.provider value={{alerts: state,
+ return(<AlertContext.Provider value={{alerts: state,
                                       setAlert}}>   
 
- { props.childern} </alertContext.provider>)
+ { props.childern} </AlertContext.Provider>)
 
 }
 
-export default alertState;
+export default AlertState;

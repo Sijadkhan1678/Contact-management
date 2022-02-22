@@ -1,14 +1,15 @@
 const express = require('express');
 const PORT = process.env.PORT || 3000;
 const connectDB= require('./config/db');
+const app = express();
 
 // ******** connect mongodb **********
 
-connectDB();
+ connectDB();
 
 app.use(express.json({extended: false}))
 
-const app = express();
+
 app.use('/api/users',require('./routes/users'));
 app.use('/api/auth',require('./routes/auth'));
 app.use('/api/contacts',require('./routes/contacts'));
