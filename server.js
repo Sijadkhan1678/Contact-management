@@ -5,7 +5,7 @@ const app = express();
 
 // ******** connect mongodb **********
 
- connectDB();
+connectDB();
 
 app.use(express.json({extended: false}))
 

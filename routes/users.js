@@ -1,5 +1,5 @@
    const express = require('express')
-   router = express.Router();
+   const router = express.Router();
 
    const {  check,validationResult} = require('express-validator/check')
    const config = require('config');
@@ -19,7 +19,7 @@
            min: 6
          })
 
-       ], (req, res) => {
+       ], async (req, res) => {
          const errors = validationResult(req);
          if (!errors.isEmpty()) {
            res.status(400).json({  error: errors.array() })

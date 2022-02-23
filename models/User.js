@@ -1,6 +1,6 @@
-const mongoos=  require('mongoos')
+const mongoose=  require('mongoose')
              
-const Userschema= mongoos.Schema(
+const Userschema= mongoose.Schema(
 {
 name:  {
 type: String,
@@ -30,4 +30,4 @@ default:  Date.now
 );
 
 
-module.exports= mongoos.model('user',Userschema)
+module.exports= mongoose.model('user',Userschema)

@@ -1,13 +1,13 @@
-const express = require('express');
+const express= require('express')
 const router = express.Router();
 const { check, validationResult} = require('express-validator/check')
 
-const User = require('../model/User');
+const User = require('../models/User');
 
 const Contact = require('../models/Contacts')
 
 const auth= require('../middleware/auth');
-const { route } = require('express/lib/application');
+
 
 //##  Get api/contacts
 //**  desc: get all contacts  **
@@ -31,7 +31,7 @@ router.get('/',auth, async (req,res)=>{
 //%%% desc add contact
 //%%% access public
 
-router('/',[auth, [check('name','Name is required').not().isEmpty()]],
+router.post('/',[auth, [check('name','Name is required').not().isEmpty()]],
 async (req,res)=>{
    
     const errors= validationResult(req);
@@ -94,7 +94,7 @@ router.put('/:id',auth, async (req,res)=>{
         if(contact.user.toString() !== req.user.id){
             res.status(401).json({msg: 'you don`t have the correct authorization to update this contact'})
         }
-        const contact = await Contact.findByIdAndUpdate(req.params.id,{  $set: contactfilds },
+         contact = await Contact.findByIdAndUpdate(req.params.id,{  $set: contactfilds },
             {
             new: true
               })

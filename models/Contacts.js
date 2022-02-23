@@ -21,7 +21,7 @@ const contactSchema= mongoose.Schema(
        type: String,
        require: true
     },
-    relationship:{
+    type:{
         type: String,
         default : 'Professional'
     },
