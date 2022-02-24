@@ -1,6 +1,7 @@
 import React, {useReducer} from 'react'
 import contactContext from './contactContext'
 import contactReducer from './contactReducer'
+import axios  from 'axios'
 import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CLEAR_CURRENT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
 
 
@@ -17,7 +18,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
 
 
     // add contact 
-  const  addContact= contact=>{
+  const  addContact= async formData =>{
     const config={
         headers: {
           'Content-Type': 'application/json'
@@ -25,7 +26,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
       }
      
      try{
-       const res = axios.post('/api/contacts',formData,config);
+       const res = await axios.post('/api/contacts',formData,config);
       dispatch({
        type: ADD_CONTACT,
        payload:  res.data

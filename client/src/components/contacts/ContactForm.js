@@ -1,7 +1,5 @@
-
 import React,{useState,useContext,useEffect} from 'react';
 import ContactContext from '../../context/contacts/contactContext';
-
 
 
  const ContactForm = () => {
@@ -17,9 +15,11 @@ import ContactContext from '../../context/contacts/contactContext';
         email: '',
         phone: '',
         type: 'personal'
+
    
        })
      }
+     // eslint-disable-next-line
    },[contactContext,current]);
 
 const  allClear = () =>{
@@ -38,7 +38,7 @@ const  allClear = () =>{
  const onsubmit= e=>{
      e.preventDefault();
 
-     if(current==null){
+     if(current===null){
 
        Addcontact(contact);
 
@@ -49,7 +49,7 @@ const  allClear = () =>{
     
  }
   return (
-    <form onSubmit={onsubmit}>
+    <form onSubmit={onsubmit} className='form'>
        <h2>{current ? 'Edit contact' : 'Add contact'}</h2> 
         <input type='text' name='name' placeholder='Name'
          value={name} onChange={onchange} />
@@ -64,12 +64,14 @@ const  allClear = () =>{
 
         <input 
         type='radio' name='type' value='personal' 
-        checked={type=='personal'} onChange={onchange}/> personal {' '}
+        checked={type==='personal'} onChange={onchange}/> personal {' '}
 
         <input type='radio' name='type' value='professional'  
-             checked={type=='professional'} onChange={onchange}/> professional
+             checked={type==='professional'} onChange={onchange}/> professional
 
-        <div><input type='submit' value={current ? 'Update contact': 'Add contact' }/></div>
+        <div>
+          <input type='submit' value={current ? 'Update contact': 'Add contact' }/>
+        </div>
         {current && (
           <button onClick={allClear}>Clear</button>
         )}

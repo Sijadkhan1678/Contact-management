@@ -25,7 +25,7 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
       }
 
       try{
-           const res = axios.post.get('/api/auth');
+           const res = await axios.post('/api/auth');
            dispatch({type: USER_LOADED,payload: res.data})
       }
       catch(err){
@@ -68,7 +68,7 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
      }
     
     try{
-      const res = axios.post('/api/user',formData,config);
+      const res = await axios.post('/api/user',formData,config);
      dispatch({
       type: REGISTER_SUCCESS,
       payload:  res.data
