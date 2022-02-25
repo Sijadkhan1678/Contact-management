@@ -20,7 +20,7 @@ const  ContactItems =({contact}) => {
     <div>
        <h3>{name}
        <span className={'badge'+(type !=='professional' ? 'badge-primary': 'badge-success')}>
-           {type.charAt(0).toUppercase()+type.slice(1)}  </span>
+            {/*type.charAt(0).toUppercase()+type.slice(1)*/}  </span> 
        </h3>
        <ul>
            {email && (

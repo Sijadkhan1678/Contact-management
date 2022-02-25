@@ -6,15 +6,15 @@ const Alert= () =>{
  const {alerts}= alertContext
  
  return(
-  alerts.length >0 &&
- (alerts.map(alert => <div key={alert.id} className={`alert ${alert.type}`}>
+     
+  alerts.length !==null  && alerts.map(alert => (<div key={alert.id} className={`alert ${alert.type}`}>
 
-  <i className={`fas fa-info-circle`}/> ${alert.msg}
- </div>
+  <i className='fas fa-info-circle'/> ${alert.msg}
+ </div>)
 
  )
- ))
-
+     )
+     
 }
 
 export default Alert;

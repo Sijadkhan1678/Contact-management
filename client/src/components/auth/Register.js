@@ -1,13 +1,13 @@
 import React,{useState,useEffect,useContext} from "react";
-import authContext  from "../../context/auth/authContext";
+import AuthContext  from "../../context/auth/authContext";
 import AlertContext from '../../context/alert/alertContext'
 
  const Register = props => {
-     const AuthContext= useContext(authContext);
+     const authContext= useContext(AuthContext);
      const alertContext= useContext(AlertContext);
 
      const {setAlert}= alertContext
-     const {register,clearErrors,error,isAuthenticated}= AuthContext;
+     const {register,clearErrors,error,isAuthenticated}= authContext;
      
      const [user,setUser]=useState({
         name: '',
@@ -31,7 +31,7 @@ import AlertContext from '../../context/alert/alertContext'
    const  onChange = e=> setUser({...user,[e.target.name]: e.target.value});
 const onSubmit = e =>{
     e.preventDefault();
-    if(name=='' || email=='' || password==''){
+    if(name==' ' || email==' ' || password==' '){
 
        setAlert('please enter all fields','danger')
 
@@ -69,7 +69,7 @@ const onSubmit = e =>{
             <lable htmlFor='password2'>Name</lable>
             <input type='password' name='password2' value={password2} onChange={onChange} minLength='6'/>
         </div>
-        <input type='submit' value='Register'/>
+        <input type='submit' value='Register' className="btn btn-primary btn-block"/>
 
         </form>
       

@@ -15,10 +15,20 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
         filtered: null
     }
     const [state,dispatch]= useReducer(contactReducer,initialState)
+  
+    // get Contacts 
+    const getContacts = async () =>{
 
+      try{
+      const res = await axios.get('/api/contacts')
+      }
+      catch(err){
+        console.log(err)
+      }
+    }
 
-    // add contact 
-  const  addContact= async formData =>{
+    // add Contact
+  const  addContact= async contact =>{
     const config={
         headers: {
           'Content-Type': 'application/json'
@@ -26,7 +36,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
       }
      
      try{
-       const res = await axios.post('/api/contacts',formData,config);
+       const res = await axios.post('/api/contacts',contact,config);
       dispatch({
        type: ADD_CONTACT,
        payload:  res.data
@@ -38,20 +48,38 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
 }
 
   // uptate contact 
-    const updateContact = contact =>{
-        dispatch({
-            type: UPDATE_CONTACT,
-            payload: contact
-        })
-        
-    }
+  const  updateContact= async contact =>{
+    const config={
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
+     
+     try{
+       const res = await axios.put(`/api/contacts${contact._id}`,contact,config);
+      dispatch({
+       type: ADD_CONTACT,
+       payload:  res.data
+      })
+     }
+     catch(err){
+         console.log(err)
+     }
+}
 
+  
   // delete contact
-  const deleteContact = id =>{
+  const deleteContact = async id =>{
+    try{
+    const res = await axios.delete(`/api/contacts${id}`);
        dispatch({
            type: DELETE_CONTACT,
            payload : id
        })
+      }
+      catch(err){
+        console.log(err)
+      }
   }
 
   
@@ -107,7 +135,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
       clearCurrent,
       clearContacts,
   }}>
-      {props.childern}
+      {props.children}
   </contactContext.Provider> )
 }
 

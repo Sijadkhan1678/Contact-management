@@ -3,7 +3,7 @@ import AuthContext from '../../context/auth/authContext';
 import AlertContext from '../../context/alert/alertContext'
 
 
- const Register = props => {
+ const Login = props => {
    const authContext= useContext(AuthContext);
    const alertContext= useContext(AlertContext);
 
@@ -18,6 +18,8 @@ import AlertContext from '../../context/alert/alertContext'
         setAlert(error,'danger')
         clearErrors();
     }
+    // eslint-disable-next-line
+
 },[error,isAuthenticated,props.history])
 
      const [user,setUser]=useState({
@@ -32,7 +34,7 @@ import AlertContext from '../../context/alert/alertContext'
 
   const  onSubmit = e=>{
     e.preventDefault();
-    if(email=='' || password==''){
+    if(email=== ' ' || password===' '){
       setAlert('Please fill the login form', 'danger');
     } else{
       loginUser({email,password});
@@ -42,6 +44,7 @@ import AlertContext from '../../context/alert/alertContext'
 
   return (
     <div className='form-container'>
+      <h1>User Login</h1>
        <form onSubmit={onSubmit}>
         <div className='form-control'>
             <lable htmlFor='email'>Email</lable>
@@ -51,11 +54,11 @@ import AlertContext from '../../context/alert/alertContext'
             <lable htmlFor='password'>Password</lable>
             <input type='password' name='password' value={password} onChange={onChange} />
         </div>
-        <input type='submit' value='Login'/>
+        <input  type='submit' value='Login'className="btn btn-primary btn-block"/>
         </form>
       
 
     </div>
   )
 }
-export default Register;
+export default Login;

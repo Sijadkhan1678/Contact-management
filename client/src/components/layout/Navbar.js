@@ -16,21 +16,23 @@ const onLogout= ()=>{
 const authLink=(
 <Fragment>
     <li>Hello {user&& user.name}</li>
-    <li><a href='#!' onClick={onLogout}>
+    <li>
+        <a href='#!' onClick={onLogout}>
         <i className='fas fa-sign-out-alt'/>
         <span className='hide-sm'>Logout</span>
-        </a></li>
+        </a>
+        </li>
 </Fragment>
 )
 const guestLinks=(
     <Fragment>
-      <li><Link to='/'>Rigister</Link></li>
-     <li> <Link to='/'>Login</Link> </li>
+      <li><Link to='/register'>Rigister</Link></li>
+     <li> <Link to='/login'>Login</Link> </li>
     </Fragment>
 )
 
     return(
-        <div className='nav'>
+        <div className='navbar bg-primary'>
            <h1>
                <i  className={icon}/>{title}
          
@@ -38,7 +40,7 @@ const guestLinks=(
            </h1>
            <ul>
            
-               <li><link to='/about'>About</link></li>
+               <li><Link to='/about'>About</Link></li>
                {isAuthenticated ? (authLink): (guestLinks)}
               
            </ul>

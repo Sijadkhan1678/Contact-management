@@ -17,7 +17,7 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
     }
     const [state,dispatch]= useReducer(AuthReducer,initialState);
 
-    const loadUSer= async ()=>{
+    const loadUser= async ()=>{
           
       // Set token global
       if(localStorage.token){
@@ -25,7 +25,7 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
       }
 
       try{
-           const res = await axios.post('/api/auth');
+           const res = await axios.get('/api/auth');
            dispatch({type: USER_LOADED,payload: res.data})
       }
       catch(err){
@@ -41,7 +41,7 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
       }
      
      try{
-       const res = axios.post('/api/auth',formData,config);
+       const res = await axios.post('/api/auth',formData,config);
       dispatch({
        type: LOGIN_SUCCESS,
        payload:  res.data
@@ -93,11 +93,11 @@ import { REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,AUTH_ERROR,USER
          error: state.error,
          register,
          clearErrors,
-         loadUSer,
+         loadUser,
          loginUser,
          logOut
         }}>
-      {props.childern}
+      {props.children}
   </authContext.Provider> )
 }
 
