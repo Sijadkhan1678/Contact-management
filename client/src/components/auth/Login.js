@@ -10,6 +10,7 @@ import AlertContext from '../../context/alert/alertContext'
    const {setAlert}=alertContext;
    const {loginUser,isAuthenticated,clearErrors,error}=authContext;
 
+
    useEffect(()=>{
     if(isAuthenticated){
         props.history.push('/')
@@ -34,7 +35,7 @@ import AlertContext from '../../context/alert/alertContext'
 
   const  onSubmit = e=>{
     e.preventDefault();
-    if(email=== ' ' || password===' '){
+    if(email=== '' || password===''){
       setAlert('Please fill the login form', 'danger');
     } else{
       loginUser({email,password});
@@ -47,12 +48,12 @@ import AlertContext from '../../context/alert/alertContext'
       <h1>User Login</h1>
        <form onSubmit={onSubmit}>
         <div className='form-control'>
-            <lable htmlFor='email'>Email</lable>
+            <label htmlFor='email'>Email</label>
             <input type='email' name='email' value={email} placeholder='Enter email' onChange={onChange} />
         </div>
         <div className='form-control'>
-            <lable htmlFor='password'>Password</lable>
-            <input type='password' name='password' value={password} onChange={onChange} />
+            <label htmlFor='password'>Password</label>
+            <input type='password' name='password' placeholder='Enter password' value={password} onChange={onChange} />
         </div>
         <input  type='submit' value='Login'className="btn btn-primary btn-block"/>
         </form>

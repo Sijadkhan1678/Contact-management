@@ -49,8 +49,8 @@ const  allClear = () =>{
     
  }
   return (
-    <form onSubmit={onsubmit} className='form'>
-       <h2>{current ? 'Edit contact' : 'Add contact'}</h2> 
+    <form onSubmit={onsubmit} >
+       <h2 className='text-primary'>{current ? 'Edit contact' : 'Add contact'}</h2> 
         <input type='text' name='name' placeholder='Name'
          value={name} onChange={onchange} />
 
@@ -70,10 +70,10 @@ const  allClear = () =>{
              checked={type==='professional'} onChange={onchange}/> professional
 
         <div>
-          <input type='submit' value={current ? 'Update contact': 'Add contact' }/>
+          <input type='submit' className='btn btn-primary btn-block' value={current ? 'Update contact': 'Add contact' }/>
         </div>
         {current && (
-          <button onClick={allClear}>Clear</button>
+          <button onClick={allClear} className='btn btn-block btn-black'>Clear</button>
         )}
     </form>
   )

@@ -2,7 +2,7 @@ import React, {useReducer} from 'react'
 import contactContext from './contactContext'
 import contactReducer from './contactReducer'
 import axios  from 'axios'
-import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CLEAR_CURRENT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
+import {GET_CONTACTS, ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CLEAR_CURRENT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
 
 
 
@@ -10,9 +10,10 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
  const ContactState = props => {
      
     const initialState={
-        contacts: [],
+        contacts: null,
         current: null,
-        filtered: null
+        filtered: null,
+        error: null
     }
     const [state,dispatch]= useReducer(contactReducer,initialState)
   
@@ -20,7 +21,11 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
     const getContacts = async () =>{
 
       try{
-      const res = await axios.get('/api/contacts')
+      const res = await axios.get('/api/contacts');
+      dispatch({type: GET_CONTACTS,
+        payload: res.data
+      
+      })
       }
       catch(err){
         console.log(err)
@@ -28,7 +33,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
     }
 
     // add Contact
-  const  addContact= async contact =>{
+  const  Addcontact= async contact =>{
     const config={
         headers: {
           'Content-Type': 'application/json'
@@ -58,7 +63,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
      try{
        const res = await axios.put(`/api/contacts${contact._id}`,contact,config);
       dispatch({
-       type: ADD_CONTACT,
+       type: UPDATE_CONTACT,
        payload:  res.data
       })
      }
@@ -71,7 +76,7 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
   // delete contact
   const deleteContact = async id =>{
     try{
-    const res = await axios.delete(`/api/contacts${id}`);
+     await axios.delete(`/api/contacts${id}`);
        dispatch({
            type: DELETE_CONTACT,
            payload : id
@@ -126,7 +131,9 @@ import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CL
       contacts: state.contacts,
       current: state.current,
       filtered: state.filtered,
-      addContact,
+      error: state.error,
+      getContacts,
+      Addcontact,
       updateContact,
       deleteContact,
       filterContacts,

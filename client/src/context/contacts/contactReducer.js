@@ -1,10 +1,15 @@
 
-import { ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CLEAR_CURRENT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
+import {GET_CONTACTS, ADD_CONTACT,DELETE_CONTACT,UPDATE_CONTACT,CLEAR_CONTACTS,SET_CURRENT,CLEAR_CURRENT,FILTER_CONTACTS,CLEAR_FILTER } from '../Types'
 
 
 const contactReducer= (action,state)=>{
 
     switch(action.type){
+        case GET_CONTACTS:
+            return{
+                ...state,
+                contacts: action.payload
+            }
         case ADD_CONTACT:
             return{
                 ...state,
@@ -18,7 +23,7 @@ const contactReducer= (action,state)=>{
                 case UPDATE_CONTACT:
                     return{
                         ...state,
-                        contacts: state.contacts.map(contact=> contact.id == action.payload.id ? action.payload: contact)
+                        contacts: state.contacts.map(contact=> contact.id === action.payload.id ? action.payload: contact)
                     }
                     case FILTER_CONTACTS:
                         return{
@@ -31,7 +36,7 @@ const contactReducer= (action,state)=>{
                     case CLEAR_CONTACTS:
                         return{
                             ...state,
-                            contacts: []
+                            contacts: null
                         }
                         case CLEAR_FILTER:
                             return{

@@ -13,8 +13,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-  
-    
      "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
@@ -29,5 +27,5 @@
     "name": "sijad khan"
   },
   "license": "ISC",
-  "description": ""
+  "description": "Contact Management api"
 }

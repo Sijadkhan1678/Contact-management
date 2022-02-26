@@ -13,12 +13,12 @@ const Contacts=() => {
  },[])
 
  
-   if(contacts.length==0){
-   return <h2>Please use use the form to add contacts</h2>
+   if(contacts===null){
+   return <h2>Please use  the form to add contacts</h2>
 
 }
   return (
-  {  contacts.length !== 0 && !loading ? (<Fragment>
+    <Fragment>  {  contacts !== null && !loading ? (<Fragment>
       {
      filtered !== null ? filtered.map( contact => (<ContactItems key={contact.id} contact={contact}/>))
      : contacts.map(contact=> (<ContactItems key={contact.id} contact={contact} />))
@@ -28,7 +28,10 @@ const Contacts=() => {
       
     ) : (<spinner/>)}
   
+  </Fragment>
+
   )
+
 }
 
 export default Contacts;

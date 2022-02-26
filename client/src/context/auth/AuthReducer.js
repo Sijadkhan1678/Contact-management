@@ -1,49 +1,52 @@
+import {
+    REGISTER_SUCCESS,
+    REGISTER_FAIL,
+    USER_LOADED,
+    AUTH_ERROR,
+    LOGIN_SUCCESS,
+    LOGIN_FAIL,
+    LOGOUT,
+    CLEAR_ERRORS
+} from '../Types';
 
-import {REGISTER_SUCCESS,REGISTER_FAIL,LOGIN_SUCCESS,LOGIN_FAIL,LOGOUT,AUTH_ERROR,CLEAR_ERRORS, USER_LOADED } from "../Types";
-
-
-const AuthReducer = (state,action)=>{
-
-    switch(action.type){
+const authReducer= (state, action) => {
+    switch(action.type) {
         case USER_LOADED:
-            return{
+            return {
                 ...state,
-                isAthenticated: true,
-                loading: false,
+                isAuthenticated: true,
+                loading: false, 
                 user: action.payload
             }
         case REGISTER_SUCCESS:
         case LOGIN_SUCCESS:
-        case LOGOUT:
-            localStorage.setItem('token',action.payload);
-            return{
-
+            localStorage.setItem('token', action.payload.token);
+            return {
                 ...state,
                 ...action.payload,
-                isAthenticated: true,
-                loading: false                
+                isAuthenticated: true,
+                loading: false
             }
-            case REGISTER_FAIL:
-            case AUTH_ERROR:
-            case LOGIN_FAIL:
-                localStorage.removeItem('token');
-                return{
-                    ...state,
-                    isAthenticated: false,
-                    loading: false,
-                    user: null,
-                    error: action.payload
-
-
-                }
-                case CLEAR_ERRORS:
-                 return{   ...state,
-                           error: null,
-
-                 }
+        case REGISTER_FAIL:
+        case AUTH_ERROR:
+        case LOGIN_FAIL:
+        case LOGOUT:
+            localStorage.removeItem('token');
+            return {
+                ...state,
+                token: null,
+                isAuthenticated: false,
+                loading: false,
+                user: null,
+                error: action.payload
+            }
+        case CLEAR_ERRORS:
+            return {
+                ...state,
+                error: null
+            }
         default:
-         return   state;
+            return state;
     }
-
 }
-export default AuthReducer;
+export default authReducer;

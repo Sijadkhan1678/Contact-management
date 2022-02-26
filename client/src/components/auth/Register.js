@@ -31,7 +31,7 @@ import AlertContext from '../../context/alert/alertContext'
    const  onChange = e=> setUser({...user,[e.target.name]: e.target.value});
 const onSubmit = e =>{
     e.preventDefault();
-    if(name==' ' || email==' ' || password==' '){
+    if(name==='' || email==='' || password===''){
 
        setAlert('please enter all fields','danger')
 
@@ -54,19 +54,19 @@ const onSubmit = e =>{
         <h1>User Rigister</h1>
        <form onSubmit={onSubmit}>
             <div className='form-control'>
-            <lable htmlFor='name'>Name</lable>
+            <label htmlFor='name'>Name</label>
             <input type='text' name='name' value={name} placeholder='Enter your name' onChange={onChange} />
         </div>
         <div className='form-control'>
-            <lable htmlFor='email'>Email</lable>
+            <label htmlFor='email'>Email</label>
             <input type='email' name='email' value={email} placeholder='Enter email' onChange={onChange} />
         </div>
         <div className='form-control'>
-            <lable htmlFor='password'>Password</lable>
+            <label htmlFor='password'>Password</label>
             <input type='password' name='password' value={password} onChange={onChange} minLength='6'/>
         </div>
         <div className='form-control'>
-            <lable htmlFor='password2'>Name</lable>
+            <label htmlFor='password2'>Confirm password</label>
             <input type='password' name='password2' value={password2} onChange={onChange} minLength='6'/>
         </div>
         <input type='submit' value='Register' className="btn btn-primary btn-block"/>
