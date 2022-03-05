@@ -4,7 +4,7 @@ import {BrowserRouter as Router ,Route,Switch} from 'react-router-dom'
 import ContactState from './context/contacts/ContactState';
 import AlertState from './context/alert/AlertState'
 import AuthState from './context/auth/AuthState'
-import Alert from './components/pages/Alert'
+import Alert from './components/layout/Alert'
 import Home from './components/pages/Home'
 import About from './components/pages/About'
 import Navbar from './components/layout/Navbar'

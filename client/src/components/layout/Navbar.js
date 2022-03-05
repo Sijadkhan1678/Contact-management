@@ -34,7 +34,7 @@ const guestLinks=(
     return(
         <div className='navbar bg-primary'>
            <h1>
-               <i  className={icon}/>{title}
+               <i  className={icon}/> {title}
          
               
            </h1>

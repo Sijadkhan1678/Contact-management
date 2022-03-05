@@ -42,7 +42,7 @@ const onSubmit = e =>{
         register({
             name,
             email,
-            password,
+            password
 
         })
     }
