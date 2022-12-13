@@ -1,82 +1,86 @@
-import React,{useState,useContext,useEffect} from 'react';
-import ContactContext from '../../context/contacts/contactContext';
+import React, { useState, useContext, useEffect } from 'react';
+import ContactContext from '../../context/contact/contactContext';
 
+const ContactForm = () => {
+    const contactContext = useContext(ContactContext);
 
- const ContactForm = () => {
-  const contactContext= useContext(ContactContext)
-  const {Addcontact,current,clearCurrent,updateContact}=contactContext
+    const { addContact, current, clearCurrent, updateContact } = contactContext;
 
-   useEffect(()=>{
-     if (current !==null){
-       setContact(current)
-     } else{
-       setContact({
-        name:'',
+    useEffect(() => {
+        if(current !== null) {
+            setContact(current)
+        } else {
+            setContact({
+                name: '',
+                email: '',
+                phone: '',
+                type: 'personal'
+            })
+        }
+    }, [contactContext, current])
+
+    const [contact, setContact] = useState({
+        name: '',
         email: '',
         phone: '',
         type: 'personal'
+    });
 
-   
-       })
-     }
-     // eslint-disable-next-line
-   },[contactContext,current]);
+    const { name, email, phone, type } = contact;
 
-const  allClear = () =>{
-  clearCurrent();
-}
- const [contact,setContact]= useState({
-     name:'',
-     email: '',
-     phone: '',
-     type: 'personal'
- }) 
+    const onChange = e => setContact({...contact, [e.target.name]: e.target.value })
 
- const {name,email,phone,type}=contact
+    const onSubmit = e => {
+        e.preventDefault();
 
- const onchange= e=> setContact({...contact,[e.target.name]: e.target.value});
- const onsubmit= e=>{
-     e.preventDefault();
+        if(current === null) {
+            addContact(contact);
+        } else {
+            updateContact(contact)
+        }
+        clearAll();
+    }
 
-     if(current===null){
+    const clearAll = () => {
+        clearCurrent();
+    }
 
-       Addcontact(contact);
-
-     }else{
-       updateContact(contact);
-     }
-       allClear();
-    
- }
-  return (
-    <form onSubmit={onsubmit} >
-       <h2 className='text-primary'>{current ? 'Edit contact' : 'Add contact'}</h2> 
-        <input type='text' name='name' placeholder='Name'
-         value={name} onChange={onchange} />
-
-        <input 
-        type='email' name='email' placeholder='Email' 
-        value={email}  onChange={onchange}/>
-
-        <input 
-         type='text' name='phone' placeholder='Phone' 
-         value={phone} onChange={onchange}/>
-
-        <input 
-        type='radio' name='type' value='personal' 
-        checked={type==='personal'} onChange={onchange}/> personal {' '}
-
-        <input type='radio' name='type' value='professional'  
-             checked={type==='professional'} onChange={onchange}/> professional
-
-        <div>
-          <input type='submit' className='btn btn-primary btn-block' value={current ? 'Update contact': 'Add contact' }/>
-        </div>
-        {current && (
-          <button onClick={allClear} className='btn btn-block btn-black'>Clear</button>
-        )}
-    </form>
-  )
+    return (
+        <form onSubmit={onSubmit}>
+            <h2 className='text-primary'>{current ? 'Edit Contact' : 'Add Contact'}</h2>
+            <input
+                type='text'
+                placeholder='Name'
+                name='name'
+                value={name}
+                onChange={onChange}
+            />
+            <input
+                type='text'
+                placeholder='Email'
+                name='email'
+                value={email}
+                onChange={onChange}
+            />
+            <input
+                type='text'
+                placeholder='Phone'
+                name='phone'
+                value={phone}
+                onChange={onChange}
+            />
+            <h5>Contact Type</h5>
+            <input type='radio' name='type' value='personal' checked={type === 'personal' } onChange={onChange}/> Personal
+            {' '}
+            <input type='radio' name='type' value='professional' checked={type === 'professional'} onChange={onChange}/> Professional
+            <div>
+                <input type='submit' value={current ? 'Update Contact' : 'Add Contact'} className='btn btn-primary btn-block' />
+            </div>
+            {current && <div>
+                <button className="btn btn-light btn-block" onClick={clearAll}>Clear</button>
+            </div>}
+        </form>
+    )
 }
 
 export default ContactForm;

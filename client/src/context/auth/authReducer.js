@@ -7,9 +7,9 @@ import {
     LOGIN_FAIL,
     LOGOUT,
     CLEAR_ERRORS
-} from '../Types';
+} from '../types';
 
-const authReducer= (state, action) => {
+export default (state, action) => {
     switch(action.type) {
         case USER_LOADED:
             return {
@@ -49,4 +49,3 @@ const authReducer= (state, action) => {
             return state;
     }
 }
-export default authReducer;
